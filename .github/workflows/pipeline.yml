@@ -16,4 +16,4 @@ jobs:
           npm install
       - name: Linting
         run: |
-          npm lint
+          npm run lint

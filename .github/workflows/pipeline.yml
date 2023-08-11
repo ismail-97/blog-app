@@ -17,3 +17,9 @@ jobs:
       - name: Linting
         run: |
           npm run lint
+      - name: Building
+        run: |
+          npm run build
+      - name: start server
+        run: |
+          npm run start

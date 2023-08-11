@@ -1,11 +1,26 @@
+/* eslint-disable import/no-extraneous-dependencies */
 require('dotenv').config()
 require('module-alias/register')
+const path = require('path')
 const chokidar = require('chokidar')
 const express = require('express')
-const path = require('path')
 require('express-async-errors')
+const mongoose = require('mongoose')
+const { PORT, inProduction } = require('@root/server/utils/common')
 
-const { PORT, inProduction } = require('@util/common')
+const config = require('./config')
+
+mongoose.set('strictQuery', false)
+console.log('connectiong to', config.MONGODB_URI)
+
+mongoose.connect(config.MONGODB_URI)
+  .then((result) => {
+    if (!result) console.log(result)
+    console.log('connected to MongoDB')
+  })
+  .catch((error) => {
+    console.log('error connection to MongoDB:', error.message)
+  })
 
 const app = express()
 
